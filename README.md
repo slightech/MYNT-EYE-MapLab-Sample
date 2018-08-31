@@ -45,7 +45,7 @@ rosrun rviz rviz -d rviz-rovioli.rviz
 ```
 source ~/maplab_ws/devel/setup.bash
 roscore&
-tutorial_mynt_live_stereo_pinhole_equ mynt_stereo_live
+rosrun rovioli tutorial_mynt_live_stereo_pinhole_equ mynt_stereo_live
 ```
 Then, in a separate terminal, start your data source:
 ```
