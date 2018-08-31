@@ -1,3 +1,58 @@
+## MapLab with mynteye camera
+If you want run Maplab with mynteye camera, please follow the steps:
+* Download [MYNT-EYE-SDK-2](https://github.com/slightech/MYNT-EYE-SDK-2) and follow steps to install.
+* Calibrate cameras with [kalibr](https://github.com/ethz-asl/kalibr).
+* Record bag with mynt_eye_ros_wrapper in order to run ROVIOLI.
+---
+## Record bag
+```
+cd MYNT-EYE-SDK-2
+make ros
+source wrappers/ros/devel/setup.bash
+roslaunch mynt_eye_ros_wrapper display.launch
+rosbag record -O mynt_maplab /mynteye/left/image_raw /mynteye/right/image_raw /mynteye/imu/data_raw
+```
+
+## Run ROVIOLI
+Two modes exists for running ROVIOLI in VIO mode:
+* Building from a rosbag
+* Building from a rostopic
+
+## Requirements
+* Camera calibration, [example file for the mynt_maplab datasets](./applications/rovioli/mynteye/ncameras_pin_equ.yaml)
+* IMU parameters maplab, [example file for the mynt datasets](./applications/rovioli/mynteye/imu-icm20602.yaml)
+* IMU parameters Rovio, [example file for the mynt datasets](./applications/rovioli/mynteye/imu-sigmas-rovio.yaml)
+* Rovio calibration file rovio_default_config.info, [example file](./applications/rovioli/share/rovio_default_config.info)
+
+## Building a map from a rosbag
+For this tutorial, we build a map from one of the mynt datasets. Go to [download the bag file](https://pan.baidu.com/s/13OJXIQAQIfaIJpgliIvykw), **password: 9pkp**
+
+```
+source ~/maplab_ws/devel/setup.bash
+roscore&
+rosrun rovioli tutorial_mynt_stereo_pinhole_equ mynt_stereo maplab_ex.bag
+
+```
+Then, in a separate terminal, start your data source:
+```
+cd ~/maplab_ws/src/maplab/applications/rovioli/mynteye
+rosrun rviz rviz -d rviz-rovioli.rviz
+```
+
+## Building a map from a rostopic
+```
+source ~/maplab_ws/devel/setup.bash
+roscore&
+tutorial_mynt_live_stereo_pinhole_equ mynt_stereo_live
+```
+Then, in a separate terminal, start your data source:
+```
+rosbag play maplab_ex.bag  # or start your sensor node
+cd ~/maplab_ws/src/maplab/applications/rovioli/mynteye
+rosrun rviz rviz -d rviz-rovioli.rviz
+```
+---
+
 <img src="https://github.com/ethz-asl/maplab/wiki/logos/maplab_new.png" width="500">
 
 *Ubuntu 14.04+ROS indigo* and *Ubuntu 16.04+ROS kinetic*: [![Build Status](https://jenkins.asl.ethz.ch/buildStatus/icon?job=maplab_nightly)](https://jenkins.asl.ethz.ch/job/maplab_nightly)
@@ -6,7 +61,7 @@
 
  * **May 2018:** maplab was presented at [ICRA](https://icra2018.org/) in Brisbane.
  * **March 2018:** Check out our release candidate with improved localization and lots of new features! [PR](https://github.com/ethz-asl/maplab/pull/55)
- 
+
 ## Description
 
 This repository contains **maplab**,  an  open,  research-oriented visual-inertial  mapping  framework, written  in  C++,  for  creating, processing  and  manipulating  multi-session  maps.
@@ -104,5 +159,5 @@ Certain components of maplab are directly using the code of the following public
  * Titus Cieslewski
  * Timo Hinzmann
  * Mathias Gehrig
- 
+
 For a complete list of contributors, have a look at [CONTRIBUTORS.md](https://github.com/ethz-asl/maplab/blob/master/CONTRIBUTORS.md)
