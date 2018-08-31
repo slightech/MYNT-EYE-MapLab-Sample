@@ -27,7 +27,7 @@ Two modes exists for running ROVIOLI in VIO mode:
 * Rovio calibration file rovio_default_config.info, [example file](./applications/rovioli/share/rovio_default_config.info)
 
 ## Building a map from a rosbag
-For this tutorial, we build a map from one of the mynt datasets. Go to [download the bag file](https://pan.baidu.com/s/13OJXIQAQIfaIJpgliIvykw), **password: 9pkp**
+For this tutorial, we build a map from one of the mynt datasets. Go to downlaod [ maplab_ex.bag](https://pan.baidu.com/s/13OJXIQAQIfaIJpgliIvykw), **password: 9pkp**
 
 ```
 source ~/maplab_ws/devel/setup.bash
@@ -35,7 +35,7 @@ roscore&
 rosrun rovioli tutorial_mynt_stereo_pinhole_equ mynt_stereo maplab_ex.bag
 
 ```
-Then, in a separate terminal, start your data source:
+Then, use rviz to display.
 ```
 cd ~/maplab_ws/src/maplab/applications/rovioli/mynteye
 rosrun rviz rviz -d rviz-rovioli.rviz
