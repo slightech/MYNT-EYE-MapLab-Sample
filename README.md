@@ -1,6 +1,6 @@
 ## MapLab with mynteye camera
 If you want run Maplab with mynteye camera, please follow the steps:
-* Download [MYNT-EYE-SDK-2](https://github.com/slightech/MYNT-EYE-SDK-2) and follow steps to install.
+* Download [MYNT-EYE-S-SDK](https://github.com/slightech/MYNT-EYE-S-SDK) and follow steps to install.
 * Calibrate cameras with [kalibr](https://github.com/ethz-asl/kalibr).
 * Record bag with mynt_eye_ros_wrapper in order to run ROVIOLI.
 
@@ -8,7 +8,7 @@ If you want run Maplab with mynteye camera, please follow the steps:
 
 ## Record bag
 ```
-cd MYNT-EYE-SDK-2
+cd MYNT-EYE-S-SDK
 make ros
 source wrappers/ros/devel/setup.bash
 roslaunch mynt_eye_ros_wrapper display.launch
